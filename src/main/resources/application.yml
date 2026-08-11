@@ -1,6 +1,11 @@
 spring:
   application:
     name: carplatform
+  autoconfigure:
+    # We authenticate directly against our own User table (see AuthService) rather than
+    # via a Spring Security UserDetailsService/AuthenticationManager, since this is a
+    # stateless JWT API with no form login or session use.
+    exclude: org.springframework.boot.security.autoconfigure.UserDetailsServiceAutoConfiguration
   profiles:
     active: ${SPRING_PROFILES_ACTIVE:dev}
   datasource:
