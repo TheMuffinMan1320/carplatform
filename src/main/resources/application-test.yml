@@ -1,0 +1,14 @@
+spring:
+  docker:
+    compose:
+      enabled: false
+  jpa:
+    show-sql: false
+
+app:
+  jwt:
+    secret: test-only-secret-key-not-used-outside-automated-tests-1234567890
+
+logging:
+  level:
+    com.mydrive.carplatform: INFO
