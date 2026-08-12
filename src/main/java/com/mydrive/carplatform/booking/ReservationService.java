@@ -11,6 +11,7 @@ import com.mydrive.carplatform.common.exception.ResourceNotFoundException;
 import com.mydrive.carplatform.fleet.Vehicle;
 import com.mydrive.carplatform.fleet.VehicleRepository;
 import com.mydrive.carplatform.fleet.VehicleStatus;
+import com.mydrive.carplatform.maintenance.MaintenanceEvaluationService;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -31,16 +32,19 @@ public class ReservationService {
     private final VehicleRepository vehicleRepository;
     private final UserRepository userRepository;
     private final ReservationStateMachine stateMachine;
+    private final MaintenanceEvaluationService maintenanceEvaluationService;
 
     public ReservationService(
             ReservationRepository reservationRepository,
             VehicleRepository vehicleRepository,
             UserRepository userRepository,
-            ReservationStateMachine stateMachine) {
+            ReservationStateMachine stateMachine,
+            MaintenanceEvaluationService maintenanceEvaluationService) {
         this.reservationRepository = reservationRepository;
         this.vehicleRepository = vehicleRepository;
         this.userRepository = userRepository;
         this.stateMachine = stateMachine;
+        this.maintenanceEvaluationService = maintenanceEvaluationService;
     }
 
     @Transactional(readOnly = true)
@@ -121,6 +125,9 @@ public class ReservationService {
         if (endMileage > vehicle.getMileage()) {
             vehicle.setMileage(endMileage);
         }
+        // Surface a mileage-crossing maintenance threshold immediately rather than waiting for
+        // the next scheduled sweep (see MaintenanceScheduler).
+        maintenanceEvaluationService.evaluate(vehicle);
         return reservation;
     }
 
