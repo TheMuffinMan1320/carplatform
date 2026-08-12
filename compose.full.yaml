@@ -1,0 +1,43 @@
+### Full containerized stack (app + postgres) for a self-contained demo run:
+###   docker compose -f compose.full.yaml up --build
+###
+### For the everyday local dev loop, use `./mvnw spring-boot:run` instead -- Spring Boot's
+### docker-compose support auto-detects compose.yaml (postgres only) and starts just that.
+### A single compose.yaml can't serve both roles: if it also defined the app service,
+### `mvnw spring-boot:run`'s auto-start would try to bring up the app container itself
+### (built from this same Dockerfile) alongside the one already running locally, colliding
+### on port 8080.
+services:
+  postgres:
+    image: 'postgres:16-alpine'
+    environment:
+      POSTGRES_DB: carplatform
+      POSTGRES_USER: carplatform
+      POSTGRES_PASSWORD: devpassword
+    volumes:
+      - 'carplatform-pgdata:/var/lib/postgresql/data'
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U carplatform']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  app:
+    build: .
+    ports:
+      - '8080:8080'
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+      SPRING_DOCKER_COMPOSE_ENABLED: 'false'
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/carplatform
+      SPRING_DATASOURCE_USERNAME: carplatform
+      SPRING_DATASOURCE_PASSWORD: devpassword
+      JWT_SECRET: ${JWT_SECRET:-dev-only-secret-key-please-override-in-every-non-dev-environment-1234567890}
+      STRIPE_API_KEY: ${STRIPE_API_KEY:-}
+      STRIPE_WEBHOOK_SECRET: ${STRIPE_WEBHOOK_SECRET:-}
+
+volumes:
+  carplatform-pgdata:
