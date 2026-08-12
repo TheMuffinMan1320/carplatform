@@ -73,6 +73,21 @@ requests immediately.
 docker compose -f compose.full.yaml up --build
 ```
 
+## Frontend (React)
+
+A React + TypeScript UI lives in `frontend/` and exercises every endpoint above across
+all three roles — see `frontend/README.md` for setup and a full manual demo script. Quick
+start once the backend is running on port 8080:
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Opens on `http://localhost:5173`, dev-proxied to the backend so no CORS configuration is
+needed.
+
 ## Configuration
 
 All runtime config is environment-variable driven (see `application.yml`); sensible dev
