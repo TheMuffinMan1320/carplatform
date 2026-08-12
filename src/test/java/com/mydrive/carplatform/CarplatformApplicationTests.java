@@ -1,10 +1,8 @@
 package com.mydrive.carplatform;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
-class CarplatformApplicationTests {
+class CarplatformApplicationTests extends AbstractIntegrationTest {
 
 	@Test
 	void contextLoads() {

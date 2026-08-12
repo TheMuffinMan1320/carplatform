@@ -9,6 +9,10 @@ app:
   jwt:
     secret: test-only-secret-key-not-used-outside-automated-tests-1234567890
 
+stripe:
+  api-key: sk_test_not_a_real_key
+  webhook-secret: whsec_test_only_secret_1234567890
+
 logging:
   level:
     com.mydrive.carplatform: INFO
