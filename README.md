@@ -5,6 +5,34 @@ rental booking with double-booking-proof availability, Stripe-backed payments, a
 automated maintenance scheduling. JWT-secured REST API (Spring Boot 4.1 / Java 21),
 designed to be consumed by a future React or React Native client.
 
+Built to scale from a single-lot personal fleet to a multi-location operation — vehicles,
+staff, and maintenance are all scoped by location from the schema up.
+
+## Highlights
+
+- **Double-booking is impossible, not just checked for.** Reservation overlap is enforced
+  by a Postgres exclusion constraint (`EXCLUDE USING gist`), not just an application-level
+  check — it holds even under concurrent requests.
+- **Idempotency-safe payments.** Stripe PaymentIntents keyed on the client's idempotency
+  key, passed straight through as Stripe's own request idempotency key, backed by a unique
+  DB constraint — a retried request can't double-charge or double-create.
+- **Self-issued JWT auth** with opaque, hashed, rotating refresh tokens and theft-reuse
+  detection (reusing a rotated-away token revokes the whole chain and forces re-login).
+- **Automated maintenance alerts** evaluated on both a scheduled sweep and reservation
+  completion, deduplicated so re-crossing a threshold never spams duplicate alerts.
+- **Role-based access** (customer / fleet agent / admin) enforced at the API layer and the
+  data layer — a fleet agent literally cannot touch another location's fleet.
+- **35 automated tests** (JUnit + Mockito + Testcontainers) covering state machines, auth
+  flows, booking overlap, payment idempotency, webhook signature verification, and
+  cross-tenant authorization — running against a real Postgres, not H2.
+- Dockerized, with CI (GitHub Actions) running the full test suite on every push.
+
+## Tech stack
+
+Java 21 · Spring Boot 4.1 · Spring Security · Spring Data JPA · PostgreSQL · Flyway ·
+Stripe API · JWT (jjwt) · springdoc-openapi · Testcontainers · JUnit 5 · Mockito · Docker ·
+GitHub Actions
+
 See `~/Downloads/carplatform-architecture.md` (generated alongside this repo) for a full
 architecture write-up, or the sections below to run it locally.
 
