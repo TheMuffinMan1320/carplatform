@@ -28,21 +28,26 @@ export function PaymentPanel({ reservationId }: { reservationId: string }) {
   }
 
   return (
-    <Card className="p-5">
-      <h2 className="mb-3 text-lg font-semibold text-slate-900">Payment</h2>
+    <Card className="p-6">
+      <h2 className="font-display text-lg font-semibold text-ink">Payment</h2>
 
-      <div className="mb-4 rounded-md border border-sky-200 bg-sky-50 px-3 py-2 text-xs text-sky-800">
-        This demo environment doesn't have a live Stripe key configured, so payment attempts are expected to
-        come back <strong>Failed</strong> — that reflects the real payment-gateway error path, not a bug.
+      <div className="mt-3 flex items-start gap-2.5 rounded-[3px] border border-signal/25 bg-signal-soft px-3 py-2.5 text-[13px] leading-relaxed text-ink-soft">
+        <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-signal" />
+        <span>
+          This demo environment doesn't have a live Stripe key configured, so payment attempts are expected to
+          come back <strong className="text-ink">Failed</strong> — that's the real payment-gateway error path, not a bug.
+        </span>
       </div>
+
+      <div className="dim-rule my-4" />
 
       {isLoading && <SkeletonRows count={2} />}
 
       {!isLoading && payments && payments.length > 0 && (
         <ul className="mb-4 flex flex-col gap-2">
           {payments.map((p) => (
-            <li key={p.id} className="flex items-center justify-between rounded-md bg-slate-50 px-3 py-2 text-sm">
-              <span>
+            <li key={p.id} className="flex items-center justify-between rounded-[3px] border border-ink/10 bg-vellum px-3 py-2.5 text-sm">
+              <span className="font-mono text-ink">
                 ${p.amount} {p.currency}
               </span>
               <Badge tone={PAYMENT_STATUS_TONE[p.status]}>{PAYMENT_STATUS_LABEL[p.status]}</Badge>
@@ -52,14 +57,14 @@ export function PaymentPanel({ reservationId }: { reservationId: string }) {
       )}
 
       {!isLoading && (!payments || payments.length === 0) && (
-        <p className="mb-4 text-sm text-slate-500">No payment attempts yet.</p>
+        <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.06em] text-ink-faint">No payment attempts yet.</p>
       )}
 
-      {error && <div className="mb-3 rounded-md bg-rose-50 px-3 py-2 text-sm text-rose-700">{error}</div>}
+      {error && <div className="mb-3 rounded-[3px] border border-[#b3402c]/30 bg-[#fbe7e2] px-3 py-2 text-sm text-[#8f3222]">{error}</div>}
 
       {latestPayment && (
-        <div className="mb-3 flex items-center gap-2 text-sm">
-          <span className="text-slate-600">Latest attempt:</span>
+        <div className="mb-3 flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.06em] text-ink-soft">
+          <span>Latest attempt:</span>
           <Badge tone={PAYMENT_STATUS_TONE[latestPayment.status]}>{PAYMENT_STATUS_LABEL[latestPayment.status]}</Badge>
         </div>
       )}

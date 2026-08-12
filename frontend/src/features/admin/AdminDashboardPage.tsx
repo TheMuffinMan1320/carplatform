@@ -14,15 +14,16 @@ export function AdminDashboardPage() {
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <h1 className="text-2xl font-bold text-slate-900">Admin Dashboard</h1>
-        <p className="text-slate-600">Unscoped access across all locations.</p>
+        <h1 className="font-display text-2xl font-semibold text-ink">Admin Dashboard</h1>
+        <p className="mt-1 text-sm text-ink-soft">Unscoped access across all locations.</p>
       </div>
+      <div className="dim-rule" />
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {LINKS.map((link) => (
           <Link key={link.to} to={link.to}>
-            <Card className="h-full p-5 transition-shadow hover:shadow-md">
-              <h2 className="font-semibold text-slate-900">{link.title}</h2>
-              <p className="mt-1 text-sm text-slate-600">{link.description}</p>
+            <Card className="h-full p-5 transition-shadow hover:shadow-[0_4px_16px_-4px_rgba(22,33,44,0.18)]">
+              <h2 className="font-display text-base font-semibold text-ink">{link.title}</h2>
+              <p className="mt-1 text-sm text-ink-soft">{link.description}</p>
             </Card>
           </Link>
         ))}

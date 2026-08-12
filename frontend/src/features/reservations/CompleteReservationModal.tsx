@@ -32,7 +32,7 @@ export function CompleteReservationModal({ reservationId, onClose }: { reservati
   return (
     <Modal title="Complete Reservation" onClose={onClose}>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-        {error && <div className="rounded-md bg-rose-50 px-3 py-2 text-sm text-rose-700">{error}</div>}
+        {error && <div className="rounded-[3px] border border-[#b3402c]/30 bg-[#fbe7e2] px-3 py-2 text-sm text-[#8f3222]">{error}</div>}
         <Input
           label="Ending mileage"
           type="number"

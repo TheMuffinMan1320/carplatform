@@ -19,23 +19,26 @@ export function VehicleMaintenancePage() {
 
   const columns: Column<MaintenanceRecordResponse>[] = [
     { header: 'Service', render: (r) => SERVICE_TYPE_LABEL[r.serviceType] },
-    { header: 'Performed', render: (r) => r.performedAt },
-    { header: 'Mileage', render: (r) => r.mileageAtService.toLocaleString() },
-    { header: 'Cost', render: (r) => (r.cost ? `$${r.cost}` : '—') },
+    { header: 'Performed', render: (r) => <span className="font-mono">{r.performedAt}</span> },
+    { header: 'Mileage', render: (r) => <span className="font-mono">{r.mileageAtService.toLocaleString()}</span> },
+    { header: 'Cost', render: (r) => <span className="font-mono">{r.cost ? `$${r.cost}` : '—'}</span> },
     { header: 'Notes', render: (r) => r.notes ?? '—' },
   ]
 
   return (
     <div className="flex flex-col gap-6">
-      <Link to="/fleet/vehicles" className="text-sm text-slate-500 hover:text-slate-700">
-        ← Back to fleet vehicles
+      <Link to="/fleet/vehicles" className="inline-flex w-fit items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.08em] text-ink-faint hover:text-ink">
+        <svg viewBox="0 0 12 12" className="h-3 w-3" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round">
+          <path d="M7 2 L3 6 L7 10" />
+        </svg>
+        Back to fleet vehicles
       </Link>
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-bold text-slate-900">
+          <h1 className="font-display text-2xl font-semibold text-ink">
             {vehicle ? `${vehicle.make} ${vehicle.model} — Maintenance` : 'Maintenance'}
           </h1>
-          <p className="text-slate-600">Service history for this vehicle.</p>
+          <p className="mt-1 text-sm text-ink-soft">Service history for this vehicle.</p>
         </div>
         <Button onClick={() => setShowForm(true)}>+ Add Record</Button>
       </div>

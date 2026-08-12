@@ -1,0 +1,125 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-12T00:00:00.000Z",
+  "title": "Design System: MyDrive",
+  "extensions": {
+    "colorMeta": {
+      "signal": { "role": "primary", "displayName": "Signal Blue", "canonical": "#2f6fed", "tonalRamp": ["#0d1f52", "#15316f", "#1d459a", "#2456c2", "#2f6fed", "#6b96f4", "#a3c0f8", "#dbe7fd"] },
+      "blueprint": { "role": "secondary", "displayName": "Cyanotype", "canonical": "#122a4e", "tonalRamp": ["#060f1e", "#0b1c38", "#122a4e", "#1c3d6b", "#2c5590", "#5b83b8", "#9bb7d8", "#d3e2f2"] },
+      "ink": { "role": "neutral", "displayName": "Graphite Ink", "canonical": "#16212c", "tonalRamp": ["#0a0f14", "#16212c", "#26333f", "#3c4b58", "#556572", "#74848f", "#a3aeb6", "#d6dcdf"] },
+      "vellum": { "role": "neutral", "displayName": "Vellum", "canonical": "#f4f6f7", "tonalRamp": ["#c9cfd1", "#d3dce1", "#e8edf0", "#f4f6f7", "#f7f9fa", "#fafbfc", "#fcfdfd", "#ffffff"] },
+      "available": { "role": "status", "displayName": "Available Green", "canonical": "#1f8b4c", "tonalRamp": ["#0b3b20", "#12572f", "#197040", "#1f8b4c", "#3ba86a", "#72c896", "#a9e0bf", "#d7f2e2"] },
+      "pending": { "role": "status", "displayName": "Pending Amber", "canonical": "#a5751f", "tonalRamp": ["#452f0c", "#664515", "#84591b", "#a5751f", "#c2913f", "#dab173", "#eeceac", "#f8e6cf"] },
+      "danger": { "role": "status", "displayName": "Danger Red", "canonical": "#b3402c", "tonalRamp": ["#4a1a11", "#6f2718", "#8f321e", "#b3402c", "#c66143", "#d98a73", "#ecb6a5", "#f8ded4"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display / Space Grotesk", "purpose": "Hero headlines, page titles, buttons, nav, prices — anything the user decides or acts on." },
+      "body": { "displayName": "Body / IBM Plex Sans", "purpose": "Paragraph copy: hero subtext, hints, explanatory notes." },
+      "label": { "displayName": "Label / IBM Plex Mono", "purpose": "Field labels, table headers, badges, VIN/dates/mileage, captions, dimension callouts — anything the user reads as fact." }
+    },
+    "shadows": [
+      { "name": "resting-card", "value": "0 1px 2px rgba(22,33,44,0.04), 0 4px 10px -4px rgba(22,33,44,0.08)", "purpose": "Vehicle cards, Card panels, table container — barely-there depth for things resting on the page." },
+      { "name": "floating-modal", "value": "0 8px 30px -8px rgba(11,28,56,0.35)", "purpose": "Modal — needs real separation from its cyanotype-tinted scrim." },
+      { "name": "floating-toast", "value": "0 8px 24px -8px rgba(11,28,56,0.3)", "purpose": "Toast — floats over content, slightly lighter than the modal shadow." }
+    ],
+    "motion": [
+      { "name": "ease-default", "value": "150ms ease", "purpose": "Button/link color transitions, nav underline, hover states — the only motion in the system, kept short and unobtrusive." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "lg", "value": "1024px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Default call-to-action button — Graphite Ink fill, darkens to Cyanotype on hover.",
+      "html": "<button class=\"ds-btn-primary\">Book this vehicle</button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border-radius: 3px; padding: 8px 16px; font-family: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif; font-size: 13px; font-weight: 500; letter-spacing: 0.01em; background: #16212c; color: #f4f6f7; border: 1px solid #16212c; transition: background 150ms ease; } .ds-btn-primary:hover { background: #122a4e; } .ds-btn-primary:focus-visible { outline: 2px solid #2f6fed; outline-offset: 2px; } .ds-btn-primary:disabled { background: #5a6b78; border-color: #5a6b78; cursor: not-allowed; }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Outline button for lower-emphasis actions (Cancel, Previous/Next).",
+      "html": "<button class=\"ds-btn-secondary\">Cancel</button>",
+      "css": ".ds-btn-secondary { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border-radius: 3px; padding: 8px 16px; font-family: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif; font-size: 13px; font-weight: 500; background: #f4f6f7; color: #16212c; border: 1px solid rgba(22,33,44,0.3); transition: background 150ms ease, border-color 150ms ease; } .ds-btn-secondary:hover { background: #e8edf0; border-color: #16212c; }"
+    },
+    {
+      "name": "Status Badge",
+      "kind": "chip",
+      "refersTo": "badge",
+      "description": "Status tag with a solid indicator dot — six tones (green/blue/amber/red/slate/purple), always uppercase mono.",
+      "html": "<span class=\"ds-badge ds-badge--available\"><span class=\"ds-badge__dot\"></span>Available</span>",
+      "css": ".ds-badge { display: inline-flex; align-items: center; gap: 6px; border-radius: 3px; padding: 2px 8px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; border: 1px solid; } .ds-badge__dot { width: 6px; height: 6px; border-radius: 9999px; } .ds-badge--available { background: #e2f3e8; color: #1f8b4c; border-color: rgba(31,139,76,0.3); } .ds-badge--available .ds-badge__dot { background: #1f8b4c; }"
+    },
+    {
+      "name": "Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Resting content container — hairline border, barely-there shadow, 3px corners.",
+      "html": "<div class=\"ds-card\">Card content</div>",
+      "css": ".ds-card { border-radius: 3px; border: 1px solid rgba(22,33,44,0.12); background: #ffffff; box-shadow: 0 1px 2px rgba(22,33,44,0.04), 0 4px 10px -4px rgba(22,33,44,0.08); padding: 24px; }"
+    },
+    {
+      "name": "Text Input",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Field with an uppercase mono label above and a Signal Blue focus ring.",
+      "html": "<label class=\"ds-field\"><span class=\"ds-field__label\">Email</span><input class=\"ds-field__input\" type=\"email\" /></label>",
+      "css": ".ds-field { display: flex; flex-direction: column; gap: 6px; font-size: 14px; } .ds-field__label { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: #4b5d6c; } .ds-field__input { border-radius: 3px; border: 1px solid rgba(22,33,44,0.25); background: #f4f6f7; padding: 8px 12px; font-size: 14px; color: #16212c; } .ds-field__input:focus { outline: none; border-color: #2f6fed; box-shadow: 0 0 0 1px #2f6fed; } .ds-field__input::placeholder { color: #5a6b78; }"
+    },
+    {
+      "name": "Nav Link",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "Top navigation item — active state is a 2px Signal Blue underline, never a background pill.",
+      "html": "<a class=\"ds-nav-link ds-nav-link--active\">Browse</a>",
+      "css": ".ds-nav-link { position: relative; padding: 4px 0; font-family: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif; font-size: 13px; font-weight: 500; letter-spacing: 0.01em; color: #5a6b78; text-decoration: none; transition: color 150ms ease; } .ds-nav-link:hover { color: #4b5d6c; } .ds-nav-link--active { color: #16212c; } .ds-nav-link--active::after { content: ''; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: #2f6fed; }"
+    },
+    {
+      "name": "Dimension Divider",
+      "kind": "custom",
+      "refersTo": "dim-rule",
+      "description": "The system's signature section divider — a hairline with two perpendicular tick marks at its ends, standing in for a plain <hr>.",
+      "html": "<div class=\"ds-dim-rule\"></div>",
+      "css": ".ds-dim-rule { position: relative; height: 1px; background: #d3dce1; } .ds-dim-rule::before, .ds-dim-rule::after { content: ''; position: absolute; top: -3px; width: 1px; height: 7px; background: #d3dce1; } .ds-dim-rule::before { left: 0; } .ds-dim-rule::after { right: 0; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Spec Sheet",
+    "overview": "MyDrive is a multi-location car-rental platform rendered as a working automotive document, not a dealership advertisement. Every vehicle is presented the way a real spec sheet would present it — measured dimensions, a technical line-drawing silhouette in place of a photo, VIN and mileage as data rather than trivia — because the product's actual differentiation (database-enforced no-double-booking, idempotent payments, location-scoped authorization) is a claim about rigor, and the interface should look as rigorous as the backend actually is. The system was chosen deliberately against two earlier, more atmospheric directions (a valet-claim-ticket world and a motorsport-broadcast-timing world) because they read as evocative rather than literal; Spec Sheet won because it is the most concretely automotive and the most practically legible of the candidates. Two registers share one vocabulary: public decision-making surfaces get the full cyanotype cover-page treatment, while authenticated operate screens stay on plain vellum, dense and hairline-ruled.",
+    "keyCharacteristics": [
+      "A working blueprint's palette: cool vellum and graphite for documents, deep cyanotype only for cover-page moments.",
+      "IBM Plex Mono, uppercase and tracked, as the universal texture for labels, captions, and data.",
+      "A single 3px corner radius everywhere; nothing rounder except status dots.",
+      "Hairline borders and a signature dimension-line divider do the separating; shadows are reserved for things that leave the page's plane.",
+      "No vehicle photography anywhere — a hand-authored technical silhouette stands in for every image."
+    ],
+    "rules": [
+      { "name": "The One Accent Rule", "body": "Signal Blue is the only color in the system used to mean \"you can act on this.\" Status colors mean \"this is what's true right now\" and are never repurposed for emphasis or navigation.", "section": "colors" },
+      { "name": "The Cover-Page Rule", "body": "Cyanotype is a hero/brand-moment ground, never a working-screen ground. If a screen has a data table or a form the user fills out repeatedly, it sits on Vellum.", "section": "colors" },
+      { "name": "The Two-Voice Rule", "body": "Space Grotesk is for things the user decides or acts on; IBM Plex Mono is for things the user reads as fact.", "section": "typography" },
+      { "name": "The No-Kicker Rule", "body": "No small caption label ever sits directly above a heading as an eyebrow. Headlines carry their own weight.", "section": "typography" },
+      { "name": "The Document Rule", "body": "A resting card lies flat on the sheet; only something that has left the page's plane (a modal over a scrim, a toast over content) earns a real shadow.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do set every label, caption, table header, and data value in IBM Plex Mono, uppercase, 0.06–0.08em tracked.",
+      "Do keep every corner at exactly 3px, or fully circular for dots/hubs.",
+      "Do reserve Signal Blue for things the user can click or that are currently active/selected.",
+      "Do use the dimension-line divider instead of a plain border divider between sections within a card.",
+      "Do keep the Cyanotype ground to hero/brand moments only; Operate screens stay on Vellum.",
+      "Do carry the cyanotype brand panel to every breakpoint on auth pages — compress it, never hide it."
+    ],
+    "donts": [
+      "Don't place a small caption/eyebrow label directly above a heading.",
+      "Don't use gradients, glassmorphism as pure decoration, or a colored border-left/border-right accent on cards or alerts.",
+      "Don't use a hard-offset flat shadow anywhere — this system is a printed document, not neobrutalist.",
+      "Don't use real vehicle photography or stock imagery anywhere.",
+      "Don't treat the vehicle blueprint's dimension callouts as real per-vehicle data — they're schematic.",
+      "Don't reuse a status color for anything other than the state it's assigned to elsewhere in the app."
+    ]
+  }
+}

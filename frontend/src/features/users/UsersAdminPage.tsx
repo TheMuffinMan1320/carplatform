@@ -31,8 +31,8 @@ export function UsersAdminPage() {
     <div className="flex flex-col gap-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-bold text-slate-900">Users</h1>
-          <p className="text-slate-600">All accounts across the platform.</p>
+          <h1 className="font-display text-2xl font-semibold text-ink">Users</h1>
+          <p className="mt-1 text-sm text-ink-soft">All accounts across the platform.</p>
         </div>
         <Button onClick={() => setShowCreate(true)}>+ Add User</Button>
       </div>

@@ -45,25 +45,32 @@ export function ReservationDetailPage() {
 
   return (
     <div className="flex flex-col gap-6">
-      <Link to="/my/reservations" className="text-sm text-slate-500 hover:text-slate-700">
-        ← Back to my reservations
+      <Link to="/my/reservations" className="inline-flex w-fit items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.08em] text-ink-faint hover:text-ink">
+        <svg viewBox="0 0 12 12" className="h-3 w-3" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round">
+          <path d="M7 2 L3 6 L7 10" />
+        </svg>
+        Back to my reservations
       </Link>
 
-      <Card className="p-5">
+      <Card className="p-6">
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div>
-            <h1 className="text-xl font-bold text-slate-900">
+            <h1 className="font-display text-xl font-semibold text-ink">
               {vehicle ? `${vehicle.make} ${vehicle.model}` : 'Reservation'}
             </h1>
-            <p className="text-slate-600">
+            <p className="mt-0.5 font-mono text-[12px] text-ink-soft">
               {reservation.startDate} → {reservation.endDate}
             </p>
           </div>
           <Badge tone={RESERVATION_STATUS_TONE[reservation.status]}>{RESERVATION_STATUS_LABEL[reservation.status]}</Badge>
         </div>
 
-        <div className="mt-4 flex items-center justify-between border-t border-slate-200 pt-4">
-          <span className="text-lg font-semibold text-slate-900">Total: ${reservation.totalAmount}</span>
+        <div className="dim-rule my-4" />
+
+        <div className="flex items-center justify-between">
+          <span className="font-display text-lg font-semibold text-ink">
+            Total: ${reservation.totalAmount}
+          </span>
           {reservation.status === 'RESERVED' && (
             <Button variant="danger" onClick={handleCancel} loading={cancelReservation.isPending}>
               Cancel reservation
@@ -71,11 +78,13 @@ export function ReservationDetailPage() {
           )}
         </div>
         {reservation.status === 'ACTIVE' && (
-          <p className="mt-2 text-xs text-slate-500">
+          <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.05em] text-ink-faint">
             This reservation is already active (picked up) and can no longer be self-cancelled.
           </p>
         )}
-        {cancelError && <div className="mt-3 rounded-md bg-rose-50 px-3 py-2 text-sm text-rose-700">{cancelError}</div>}
+        {cancelError && (
+          <div className="mt-3 rounded-[3px] border border-[#b3402c]/30 bg-[#fbe7e2] px-3 py-2 text-sm text-[#8f3222]">{cancelError}</div>
+        )}
       </Card>
 
       <PaymentPanel reservationId={reservation.id} />

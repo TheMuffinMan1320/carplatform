@@ -8,16 +8,16 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const VARIANT_CLASSES: Record<Variant, string> = {
-  primary: 'bg-slate-900 text-white hover:bg-slate-700 disabled:bg-slate-400',
-  secondary: 'bg-white text-slate-900 border border-slate-300 hover:bg-slate-50 disabled:text-slate-400',
-  danger: 'bg-rose-600 text-white hover:bg-rose-500 disabled:bg-rose-300',
-  ghost: 'bg-transparent text-slate-700 hover:bg-slate-100 disabled:text-slate-400',
+  primary: 'bg-ink text-vellum border border-ink hover:bg-blueprint disabled:bg-ink-faint disabled:border-ink-faint',
+  secondary: 'bg-vellum text-ink border border-ink/30 hover:border-ink hover:bg-vellum-dim disabled:text-ink-faint disabled:border-ink/15',
+  danger: 'bg-[#b3402c] text-vellum border border-[#b3402c] hover:bg-[#8f3222] disabled:bg-[#b3402c]/40 disabled:border-transparent',
+  ghost: 'bg-transparent text-ink-soft border border-transparent hover:text-ink hover:border-ink/20 disabled:text-ink-faint',
 }
 
 export function Button({ variant = 'primary', loading, disabled, className = '', children, ...rest }: ButtonProps) {
   return (
     <button
-      className={`inline-flex items-center justify-center gap-2 rounded-md px-3.5 py-2 text-sm font-medium transition-colors disabled:cursor-not-allowed ${VARIANT_CLASSES[variant]} ${className}`}
+      className={`inline-flex items-center justify-center gap-2 rounded-[3px] px-4 py-2 font-display text-[13px] font-medium tracking-[0.01em] transition-colors disabled:cursor-not-allowed ${VARIANT_CLASSES[variant]} ${className}`}
       disabled={disabled || loading}
       {...rest}
     >

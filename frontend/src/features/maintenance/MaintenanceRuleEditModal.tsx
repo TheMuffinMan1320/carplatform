@@ -51,7 +51,9 @@ export function MaintenanceRuleEditModal({ rule, onClose }: { rule: MaintenanceR
   return (
     <Modal title={`Edit rule — ${SERVICE_TYPE_LABEL[rule.serviceType]}`} onClose={onClose}>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-        {formError && <div className="rounded-md bg-rose-50 px-3 py-2 text-sm text-rose-700">{formError}</div>}
+        {formError && (
+          <div className="rounded-[3px] border border-[#b3402c]/30 bg-[#fbe7e2] px-3 py-2 text-sm text-[#8f3222]">{formError}</div>
+        )}
         <Input
           label="Mileage interval"
           type="number"

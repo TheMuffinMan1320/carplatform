@@ -28,8 +28,8 @@ export function MyReservationsPage() {
 
   const columns: Column<ReservationResponse>[] = [
     { header: 'Vehicle', render: (r) => vehiclesMap.get(r.vehicleId) ?? r.vehicleId },
-    { header: 'Dates', render: (r) => `${r.startDate} → ${r.endDate}` },
-    { header: 'Total', render: (r) => `$${r.totalAmount}` },
+    { header: 'Dates', render: (r) => <span className="font-mono text-[13px]">{r.startDate} → {r.endDate}</span> },
+    { header: 'Total', render: (r) => <span className="font-mono">${r.totalAmount}</span> },
     {
       header: 'Status',
       render: (r) => <Badge tone={RESERVATION_STATUS_TONE[r.status]}>{RESERVATION_STATUS_LABEL[r.status]}</Badge>,
@@ -37,7 +37,7 @@ export function MyReservationsPage() {
     {
       header: '',
       render: (r) => (
-        <Link to={`/my/reservations/${r.id}`} className="font-medium text-slate-700 hover:underline">
+        <Link to={`/my/reservations/${r.id}`} className="font-display text-[13px] font-medium text-signal hover:underline">
           View
         </Link>
       ),
@@ -48,8 +48,8 @@ export function MyReservationsPage() {
     <div className="flex flex-col gap-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-bold text-slate-900">My Reservations</h1>
-          <p className="text-slate-600">Bookings you've made across the fleet.</p>
+          <h1 className="font-display text-2xl font-semibold text-ink">My Reservations</h1>
+          <p className="mt-1 text-sm text-ink-soft">Bookings you've made across the fleet.</p>
         </div>
         <Select
           value={status}
@@ -75,7 +75,7 @@ export function MyReservationsPage() {
           title="No reservations yet"
           message="Browse the fleet and book a vehicle to see it here."
           action={
-            <Link to="/vehicles" className="font-medium text-slate-900 hover:underline">
+            <Link to="/vehicles" className="font-display text-sm font-medium text-signal hover:underline">
               Browse vehicles →
             </Link>
           }

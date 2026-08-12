@@ -62,7 +62,9 @@ export function CreateUserModal({ onClose }: { onClose: () => void }) {
   return (
     <Modal title="Add User" onClose={onClose}>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-        {formError && <div className="rounded-md bg-rose-50 px-3 py-2 text-sm text-rose-700">{formError}</div>}
+        {formError && (
+          <div className="rounded-[3px] border border-[#b3402c]/30 bg-[#fbe7e2] px-3 py-2 text-sm text-[#8f3222]">{formError}</div>
+        )}
         <div className="grid grid-cols-2 gap-3">
           <Input label="First name" value={firstName} onChange={(e) => setFirstName(e.target.value)} error={fieldErrors.firstName} />
           <Input label="Last name" value={lastName} onChange={(e) => setLastName(e.target.value)} error={fieldErrors.lastName} />

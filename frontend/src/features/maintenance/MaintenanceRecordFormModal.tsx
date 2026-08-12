@@ -60,7 +60,9 @@ export function MaintenanceRecordFormModal({ vehicleId, onClose }: { vehicleId: 
   return (
     <Modal title="Add Maintenance Record" onClose={onClose}>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-        {formError && <div className="rounded-md bg-rose-50 px-3 py-2 text-sm text-rose-700">{formError}</div>}
+        {formError && (
+          <div className="rounded-[3px] border border-[#b3402c]/30 bg-[#fbe7e2] px-3 py-2 text-sm text-[#8f3222]">{formError}</div>
+        )}
         <Select label="Service type" value={serviceType} onChange={(e) => setServiceType(e.target.value as ServiceType)}>
           {(Object.keys(SERVICE_TYPE_LABEL) as ServiceType[]).map((s) => (
             <option key={s} value={s}>

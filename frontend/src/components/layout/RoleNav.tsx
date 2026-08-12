@@ -6,11 +6,11 @@ interface NavItem {
   label: string
 }
 
-const PUBLIC_ITEMS: NavItem[] = [{ to: '/vehicles', label: 'Browse Vehicles' }]
+const PUBLIC_ITEMS: NavItem[] = [{ to: '/vehicles', label: 'Browse' }]
 
 const ROLE_ITEMS: Record<Role, NavItem[]> = {
   CUSTOMER: [
-    { to: '/vehicles', label: 'Browse Vehicles' },
+    { to: '/vehicles', label: 'Browse' },
     { to: '/my/reservations', label: 'My Reservations' },
   ],
   FLEET_AGENT: [
@@ -33,18 +33,23 @@ const ROLE_ITEMS: Record<Role, NavItem[]> = {
 export function RoleNav({ role }: { role: Role | null }) {
   const items = role ? ROLE_ITEMS[role] : PUBLIC_ITEMS
   return (
-    <nav className="flex flex-wrap items-center gap-1">
+    <nav className="flex flex-wrap items-center gap-4 sm:gap-5">
       {items.map((item) => (
         <NavLink
           key={item.to}
           to={item.to}
           className={({ isActive }) =>
-            `rounded-md px-3 py-1.5 text-sm font-medium transition-colors ${
-              isActive ? 'bg-slate-900 text-white' : 'text-slate-600 hover:bg-slate-100'
+            `relative py-1 font-display text-[13px] font-medium tracking-[0.01em] transition-colors ${
+              isActive ? 'text-ink' : 'text-ink-faint hover:text-ink-soft'
             }`
           }
         >
-          {item.label}
+          {({ isActive }) => (
+            <>
+              {item.label}
+              {isActive && <span className="absolute -bottom-[1px] left-0 right-0 h-[2px] bg-signal" />}
+            </>
+          )}
         </NavLink>
       ))}
     </nav>

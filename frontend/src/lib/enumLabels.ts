@@ -7,12 +7,21 @@ import type { Role } from '../types/user'
 export type BadgeTone = 'green' | 'blue' | 'amber' | 'red' | 'slate' | 'purple'
 
 export const BADGE_TONE_CLASSES: Record<BadgeTone, string> = {
-  green: 'bg-emerald-100 text-emerald-800',
-  blue: 'bg-sky-100 text-sky-800',
-  amber: 'bg-amber-100 text-amber-800',
-  red: 'bg-rose-100 text-rose-800',
-  slate: 'bg-slate-200 text-slate-700',
-  purple: 'bg-violet-100 text-violet-800',
+  green: 'border-[#1f8b4c]/30 bg-[#e2f3e8] text-[#1f8b4c]',
+  blue: 'border-[#2f6fed]/25 bg-[#e4ecfd] text-[#2f6fed]',
+  amber: 'border-[#a5751f]/30 bg-[#f6ecda] text-[#a5751f]',
+  red: 'border-[#b3402c]/25 bg-[#fbe7e2] text-[#b3402c]',
+  slate: 'border-ink/15 bg-vellum-dim text-ink-soft',
+  purple: 'border-[#5b4fc4]/25 bg-[#e9e6fa] text-[#5b4fc4]',
+}
+
+export const BADGE_DOT_CLASSES: Record<BadgeTone, string> = {
+  green: 'bg-[#1f8b4c]',
+  blue: 'bg-[#2f6fed]',
+  amber: 'bg-[#a5751f]',
+  red: 'bg-[#b3402c]',
+  slate: 'bg-ink-faint',
+  purple: 'bg-[#5b4fc4]',
 }
 
 export const VEHICLE_STATUS_LABEL: Record<VehicleStatus, string> = {
@@ -38,11 +47,19 @@ export const PRICING_TIER_LABEL: Record<PricingTier, string> = {
   LUXURY: 'Luxury',
 }
 
-export const PRICING_TIER_GRADIENT: Record<PricingTier, string> = {
-  ECONOMY: 'from-teal-400 to-emerald-600',
-  STANDARD: 'from-sky-400 to-blue-600',
-  PREMIUM: 'from-violet-400 to-purple-700',
-  LUXURY: 'from-amber-300 to-yellow-600',
+/** Tier accent used to tint the vehicle blueprint stroke and rate figure — data color, not decoration. */
+export const PRICING_TIER_ACCENT: Record<PricingTier, string> = {
+  ECONOMY: '#1f8b4c',
+  STANDARD: '#2f6fed',
+  PREMIUM: '#5b4fc4',
+  LUXURY: '#a5751f',
+}
+
+export const PRICING_TIER_SILHOUETTE: Record<PricingTier, 'compact' | 'executive'> = {
+  ECONOMY: 'compact',
+  STANDARD: 'compact',
+  PREMIUM: 'executive',
+  LUXURY: 'executive',
 }
 
 export const RESERVATION_STATUS_LABEL: Record<ReservationStatus, string> = {

@@ -40,7 +40,7 @@ function DismissButton({ alertId }: { alertId: string }) {
       >
         Dismiss
       </Button>
-      {error && <span className="text-xs text-rose-600">{error}</span>}
+      {error && <span className="font-mono text-[11px] text-[#b3402c]">{error}</span>}
     </div>
   )
 }
@@ -65,8 +65,8 @@ export function MaintenanceAlertsPage() {
   const columns: Column<MaintenanceAlertResponse>[] = [
     { header: 'Vehicle', render: (a) => vehiclesMap.get(a.vehicleId) ?? a.vehicleId },
     { header: 'Service', render: (a) => SERVICE_TYPE_LABEL[a.serviceType] },
-    { header: 'Due mileage', render: (a) => (a.dueMileage != null ? a.dueMileage.toLocaleString() : '—') },
-    { header: 'Due date', render: (a) => a.dueDate ?? '—' },
+    { header: 'Due mileage', render: (a) => <span className="font-mono">{a.dueMileage != null ? a.dueMileage.toLocaleString() : '—'}</span> },
+    { header: 'Due date', render: (a) => <span className="font-mono">{a.dueDate ?? '—'}</span> },
     { header: 'Status', render: (a) => <Badge tone={ALERT_STATUS_TONE[a.status]}>{ALERT_STATUS_LABEL[a.status]}</Badge> },
     { header: '', render: (a) => (a.status === 'OPEN' ? <DismissButton alertId={a.id} /> : null) },
   ]
@@ -74,8 +74,8 @@ export function MaintenanceAlertsPage() {
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <h1 className="text-2xl font-bold text-slate-900">Maintenance Alerts</h1>
-        <p className="text-slate-600">Vehicles due for service based on mileage or time interval rules.</p>
+        <h1 className="font-display text-2xl font-semibold text-ink">Maintenance Alerts</h1>
+        <p className="mt-1 text-sm text-ink-soft">Vehicles due for service based on mileage or time interval rules.</p>
       </div>
 
       <div className="flex flex-wrap gap-3">

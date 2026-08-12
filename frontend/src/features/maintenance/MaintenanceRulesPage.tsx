@@ -16,14 +16,14 @@ export function MaintenanceRulesPage() {
 
   const columns: Column<MaintenanceRuleResponse>[] = [
     { header: 'Service', render: (r) => SERVICE_TYPE_LABEL[r.serviceType] },
-    { header: 'Mileage interval', render: (r) => `${r.mileageInterval.toLocaleString()} mi` },
-    { header: 'Time interval', render: (r) => `${r.timeIntervalMonths} mo` },
+    { header: 'Mileage interval', render: (r) => <span className="font-mono">{r.mileageInterval.toLocaleString()} mi</span> },
+    { header: 'Time interval', render: (r) => <span className="font-mono">{r.timeIntervalMonths} mo</span> },
     ...(isAdmin
       ? [
           {
             header: '',
             render: (r: MaintenanceRuleResponse) => (
-              <button onClick={() => setEditingRule(r)} className="text-sm font-medium text-slate-700 hover:underline">
+              <button onClick={() => setEditingRule(r)} className="font-display text-[13px] font-medium text-signal hover:underline">
                 Edit
               </button>
             ),
@@ -35,8 +35,8 @@ export function MaintenanceRulesPage() {
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <h1 className="text-2xl font-bold text-slate-900">Maintenance Rules</h1>
-        <p className="text-slate-600">
+        <h1 className="font-display text-2xl font-semibold text-ink">Maintenance Rules</h1>
+        <p className="mt-1 text-sm text-ink-soft">
           Mileage and time intervals that trigger maintenance alerts.
           {!isAdmin && ' Only admins can edit these.'}
         </p>

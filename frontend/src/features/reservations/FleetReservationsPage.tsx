@@ -28,9 +28,16 @@ export function FleetReservationsPage() {
   })
 
   const columns: Column<ReservationResponse>[] = [
-    { header: 'Vehicle', render: (r) => <Link to={`/fleet/vehicles`} className="hover:underline">{vehiclesMap.get(r.vehicleId) ?? r.vehicleId}</Link> },
-    { header: 'Dates', render: (r) => `${r.startDate} → ${r.endDate}` },
-    { header: 'Total', render: (r) => `$${r.totalAmount}` },
+    {
+      header: 'Vehicle',
+      render: (r) => (
+        <Link to={`/fleet/vehicles`} className="text-ink hover:text-signal hover:underline">
+          {vehiclesMap.get(r.vehicleId) ?? r.vehicleId}
+        </Link>
+      ),
+    },
+    { header: 'Dates', render: (r) => <span className="font-mono text-[13px]">{r.startDate} → {r.endDate}</span> },
+    { header: 'Total', render: (r) => <span className="font-mono">${r.totalAmount}</span> },
     { header: 'Status', render: (r) => <Badge tone={RESERVATION_STATUS_TONE[r.status]}>{RESERVATION_STATUS_LABEL[r.status]}</Badge> },
     { header: 'Actions', render: (r) => <ReservationRowActions reservation={r} /> },
   ]
@@ -39,8 +46,8 @@ export function FleetReservationsPage() {
     <div className="flex flex-col gap-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-bold text-slate-900">Reservations</h1>
-          <p className="text-slate-600">Activate pickups, complete returns, and manage cancellations.</p>
+          <h1 className="font-display text-2xl font-semibold text-ink">Reservations</h1>
+          <p className="mt-1 text-sm text-ink-soft">Activate pickups, complete returns, and manage cancellations.</p>
         </div>
         <Select
           value={status}

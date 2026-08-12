@@ -10,7 +10,14 @@ import { EmptyState } from '../../components/ui/EmptyState'
 import { ErrorBanner } from '../../components/ui/ErrorBanner'
 import { DataTable, type Column } from '../../components/data/DataTable'
 import { Pagination } from '../../components/data/Pagination'
-import { PRICING_TIER_LABEL, VEHICLE_STATUS_LABEL, VEHICLE_STATUS_TONE } from '../../lib/enumLabels'
+import { VehicleBlueprint } from '../../components/brand/VehicleBlueprint'
+import {
+  PRICING_TIER_ACCENT,
+  PRICING_TIER_LABEL,
+  PRICING_TIER_SILHOUETTE,
+  VEHICLE_STATUS_LABEL,
+  VEHICLE_STATUS_TONE,
+} from '../../lib/enumLabels'
 import { VehicleFormModal } from './VehicleFormModal'
 import { VehicleRowActions } from './VehicleRowActions'
 import type { PricingTier, VehicleResponse, VehicleStatus } from '../../types/vehicle'
@@ -41,11 +48,25 @@ export function FleetVehiclesPage() {
   const canManage = (vehicle: VehicleResponse) => isAdmin || vehicle.locationId === user?.locationId
 
   const columns: Column<VehicleResponse>[] = [
-    { header: 'Vehicle', render: (v) => `${v.make} ${v.model} (${v.year})` },
+    {
+      header: 'Vehicle',
+      render: (v) => (
+        <div className="flex items-center gap-3">
+          <VehicleBlueprint
+            variant={PRICING_TIER_SILHOUETTE[v.pricingTier]}
+            className="h-6 w-10 shrink-0"
+            stroke={PRICING_TIER_ACCENT[v.pricingTier]}
+          />
+          <span className="font-display font-medium text-ink">
+            {v.make} {v.model} ({v.year})
+          </span>
+        </div>
+      ),
+    },
     { header: 'Location', render: (v) => locationsMap.get(v.locationId) ?? '—' },
     { header: 'Tier', render: (v) => PRICING_TIER_LABEL[v.pricingTier] },
-    { header: 'Daily Rate', render: (v) => `$${v.dailyRate}` },
-    { header: 'Mileage', render: (v) => v.mileage.toLocaleString() },
+    { header: 'Daily Rate', render: (v) => <span className="font-mono">${v.dailyRate}</span> },
+    { header: 'Mileage', render: (v) => <span className="font-mono">{v.mileage.toLocaleString()}</span> },
     { header: 'Status', render: (v) => <Badge tone={VEHICLE_STATUS_TONE[v.status]}>{VEHICLE_STATUS_LABEL[v.status]}</Badge> },
     {
       header: 'Actions',
@@ -59,8 +80,8 @@ export function FleetVehiclesPage() {
     <div className="flex flex-col gap-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-bold text-slate-900">Fleet Vehicles</h1>
-          <p className="text-slate-600">
+          <h1 className="font-display text-2xl font-semibold text-ink">Fleet Vehicles</h1>
+          <p className="mt-1 text-sm text-ink-soft">
             {isAdmin ? 'Manage vehicles across all locations.' : 'Manage vehicles at your location.'}
           </p>
         </div>

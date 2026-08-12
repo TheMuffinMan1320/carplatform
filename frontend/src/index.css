@@ -1,7 +1,62 @@
 @import 'tailwindcss';
 
+@import '@fontsource/space-grotesk/500.css';
+@import '@fontsource/space-grotesk/600.css';
+@import '@fontsource/space-grotesk/700.css';
+@import '@fontsource/ibm-plex-sans/400.css';
+@import '@fontsource/ibm-plex-sans/500.css';
+@import '@fontsource/ibm-plex-sans/600.css';
+@import '@fontsource/ibm-plex-mono/400.css';
+@import '@fontsource/ibm-plex-mono/500.css';
+
+/*
+  THESIS: MyDrive reads as a measured document, not a marketing page — every
+  vehicle is a spec sheet, not a sales pitch, refusing the glossy-photo-plus-
+  search-card rut every rental site ships.
+  OWN-WORLD: automotive blueprint/technical-drafting — vellum ground (#F4F6F7)
+  for working screens, deep cyanotype ground (#122A4E) for brand/hero moments,
+  graphite ink, hairline dimension rules with tick arrows, cross-hatch for
+  unavailable states, Space Grotesk display + IBM Plex Mono for spec data.
+  STORY: a visitor sees the fleet rendered as measured fact (dimensions, VIN,
+  rate, availability) and trusts the platform the way they'd trust a real
+  spec sheet over an ad; they book with confidence, not persuasion.
+  FIRST VIEWPORT: full-bleed cyanotype canvas, a line-drawing vehicle
+  silhouette with dimension callouts, search run as labeled spec parameters
+  (Location / Pickup / Return), primary action bottom-left on the drafting grid.
+  FORM: Spec Sheet, grounded direction #5 of 5 (steered re-roll), seed key
+  ba6452d6.
+  FINISH: unreviewed and undocumented is unfinished; this build ends with the
+  finish review, the verdict, and DESIGN.md.
+*/
+
 @theme {
-  --font-sans: 'Inter', system-ui, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+
+  --color-vellum: #f4f6f7;
+  --color-vellum-dim: #e8edf0;
+  --color-vellum-line: #d3dce1;
+
+  --color-ink: #16212c;
+  --color-ink-soft: #4b5d6c;
+  --color-ink-faint: #5a6b78;
+
+  --color-blueprint: #122a4e;
+  --color-blueprint-deep: #0b1c38;
+  --color-blueprint-line: #cfe0f5;
+  --color-blueprint-line-dim: #7fa3d6;
+
+  --color-signal: #2f6fed;
+  --color-signal-soft: #e4ecfd;
+  --color-available: #1f8b4c;
+  --color-available-soft: #e2f3e8;
+  --color-pending: #a5751f;
+  --color-pending-soft: #f6ecda;
+  --color-danger: #b3402c;
+  --color-danger-soft: #fbe7e2;
+
+  --radius-sheet: 3px;
 }
 
 :root {
@@ -11,5 +66,61 @@
 body {
   margin: 0;
   font-family: var(--font-sans);
-  @apply bg-slate-50 text-slate-900;
+  background: var(--color-vellum);
+  color: var(--color-ink);
+}
+
+/* Dimension-line divider: a hairline rule with tick arrows at each end,
+   standing in for a plain <hr> throughout the drafting world. */
+.dim-rule {
+  position: relative;
+  height: 1px;
+  background: var(--color-vellum-line);
+}
+.dim-rule::before,
+.dim-rule::after {
+  content: '';
+  position: absolute;
+  top: -3px;
+  width: 1px;
+  height: 7px;
+  background: var(--color-vellum-line);
+}
+.dim-rule::before {
+  left: 0;
+}
+.dim-rule::after {
+  right: 0;
+}
+.dim-rule--inverse {
+  background: var(--color-blueprint-line-dim);
+}
+.dim-rule--inverse::before,
+.dim-rule--inverse::after {
+  background: var(--color-blueprint-line-dim);
+}
+
+/* Cross-hatch fill for unavailable / out-of-service states. */
+.hatch {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    var(--color-ink-faint) 0,
+    var(--color-ink-faint) 1px,
+    transparent 1px,
+    transparent 7px
+  );
+}
+
+/* Vellum grid texture for the drafting canvas. */
+.drafting-grid {
+  background-image:
+    linear-gradient(var(--color-blueprint-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-blueprint-line) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+.drafting-grid--light {
+  background-image:
+    linear-gradient(var(--color-vellum-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-vellum-line) 1px, transparent 1px);
+  background-size: 24px 24px;
 }

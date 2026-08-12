@@ -34,7 +34,7 @@ export function ReservationRowActions({ reservation }: { reservation: Reservatio
   }
 
   if (reservation.status !== 'RESERVED' && reservation.status !== 'ACTIVE') {
-    return <span className="text-xs text-slate-400">—</span>
+    return <span className="font-mono text-xs text-ink-faint">—</span>
   }
 
   return (
@@ -54,7 +54,7 @@ export function ReservationRowActions({ reservation }: { reservation: Reservatio
           Cancel
         </Button>
       </div>
-      {error && <span className="text-xs text-rose-600">{error}</span>}
+      {error && <span className="font-mono text-[11px] text-[#b3402c]">{error}</span>}
       {showComplete && <CompleteReservationModal reservationId={reservation.id} onClose={() => setShowComplete(false)} />}
     </div>
   )

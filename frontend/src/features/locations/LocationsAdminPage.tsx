@@ -37,7 +37,7 @@ function DeactivateButton({ location }: { location: LocationResponse }) {
       >
         Deactivate
       </Button>
-      {error && <span className="text-xs text-rose-600">{error}</span>}
+      {error && <span className="font-mono text-[11px] text-[#b3402c]">{error}</span>}
     </div>
   )
 }
@@ -51,13 +51,13 @@ export function LocationsAdminPage() {
   const columns: Column<LocationResponse>[] = [
     { header: 'Name', render: (l) => l.name },
     { header: 'Address', render: (l) => `${l.addressLine1}, ${l.city}, ${l.region} ${l.postalCode}` },
-    { header: 'Phone', render: (l) => l.phone ?? '—' },
+    { header: 'Phone', render: (l) => <span className="font-mono">{l.phone ?? '—'}</span> },
     { header: 'Active', render: (l) => <Badge tone={l.active ? 'green' : 'slate'}>{l.active ? 'Active' : 'Inactive'}</Badge> },
     {
       header: 'Actions',
       render: (l) => (
         <div className="flex flex-wrap items-start gap-2">
-          <button onClick={() => setModalLocation(l)} className="text-sm font-medium text-slate-700 hover:underline">
+          <button onClick={() => setModalLocation(l)} className="font-display text-[13px] font-medium text-signal hover:underline">
             Edit
           </button>
           {l.active && <DeactivateButton location={l} />}
@@ -70,8 +70,8 @@ export function LocationsAdminPage() {
     <div className="flex flex-col gap-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-bold text-slate-900">Locations</h1>
-          <p className="text-slate-600">Manage rental locations.</p>
+          <h1 className="font-display text-2xl font-semibold text-ink">Locations</h1>
+          <p className="mt-1 text-sm text-ink-soft">Manage rental locations.</p>
         </div>
         <Button onClick={() => setModalLocation('new')}>+ Add Location</Button>
       </div>

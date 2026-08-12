@@ -14,22 +14,25 @@ interface DataTableProps<T> {
 
 export function DataTable<T>({ columns, rows, rowKey }: DataTableProps<T>) {
   return (
-    <div className="overflow-x-auto rounded-lg border border-slate-200 bg-white">
-      <table className="min-w-full divide-y divide-slate-200 text-sm">
-        <thead className="bg-slate-50">
+    <div className="overflow-x-auto rounded-[3px] border border-ink/12 bg-white">
+      <table className="min-w-full divide-y divide-ink/10 text-sm">
+        <thead className="bg-vellum-dim">
           <tr>
             {columns.map((col) => (
-              <th key={col.header} className="whitespace-nowrap px-4 py-2 text-left font-medium text-slate-500">
+              <th
+                key={col.header}
+                className="whitespace-nowrap px-4 py-2.5 text-left font-mono text-[11px] font-medium uppercase tracking-[0.07em] text-ink-soft"
+              >
                 {col.header}
               </th>
             ))}
           </tr>
         </thead>
-        <tbody className="divide-y divide-slate-100">
+        <tbody className="divide-y divide-ink/8">
           {rows.map((row) => (
-            <tr key={rowKey(row)} className="hover:bg-slate-50">
+            <tr key={rowKey(row)} className="transition-colors hover:bg-vellum">
               {columns.map((col) => (
-                <td key={col.header} className={`px-4 py-2 align-middle ${col.className ?? ''}`}>
+                <td key={col.header} className={`px-4 py-2.5 align-middle text-ink ${col.className ?? ''}`}>
                   {col.render(row)}
                 </td>
               ))}

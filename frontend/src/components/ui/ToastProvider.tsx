@@ -14,10 +14,10 @@ interface ToastContextValue {
 
 const ToastContext = createContext<ToastContextValue | null>(null)
 
-const TONE_CLASSES: Record<ToastTone, string> = {
-  error: 'bg-rose-600 text-white',
-  success: 'bg-emerald-600 text-white',
-  info: 'bg-slate-800 text-white',
+const TONE_DOT: Record<ToastTone, string> = {
+  error: 'bg-[#b3402c]',
+  success: 'bg-[#1f8b4c]',
+  info: 'bg-signal',
 }
 
 let nextId = 1
@@ -38,7 +38,11 @@ export function ToastProvider({ children }: { children: ReactNode }) {
       {children}
       <div className="fixed bottom-4 right-4 z-[100] flex flex-col gap-2">
         {toasts.map((toast) => (
-          <div key={toast.id} className={`max-w-sm rounded-md px-4 py-3 text-sm shadow-lg ${TONE_CLASSES[toast.tone]}`}>
+          <div
+            key={toast.id}
+            className="flex max-w-sm items-start gap-2.5 rounded-[3px] border border-ink/12 bg-white px-4 py-3 text-sm text-ink shadow-[0_8px_24px_-8px_rgba(11,28,56,0.3)]"
+          >
+            <span className={`mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full ${TONE_DOT[toast.tone]}`} />
             {toast.message}
           </div>
         ))}

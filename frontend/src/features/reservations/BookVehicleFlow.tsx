@@ -53,7 +53,7 @@ export function BookVehicleFlow({ vehicle, onClose }: BookVehicleFlowProps) {
   return (
     <Modal title={`Book ${vehicle.make} ${vehicle.model}`} onClose={onClose}>
       <div className="flex flex-col gap-4">
-        {error && <div className="rounded-md bg-rose-50 px-3 py-2 text-sm text-rose-700">{error}</div>}
+        {error && <div className="rounded-[3px] border border-[#b3402c]/30 bg-[#fbe7e2] px-3 py-2 text-sm text-[#8f3222]">{error}</div>}
         <div className="grid grid-cols-2 gap-3">
           <Input
             label="Start date"
@@ -71,20 +71,27 @@ export function BookVehicleFlow({ vehicle, onClose }: BookVehicleFlowProps) {
           />
         </div>
 
-        {!validRange && <p className="text-sm text-rose-600">End date must be on or after the start date.</p>}
+        {!validRange && <p className="text-sm text-[#b3402c]">End date must be on or after the start date.</p>}
 
         {validRange && (
-          <div className="flex items-center justify-between rounded-md bg-slate-50 px-3 py-2 text-sm">
-            <span>
+          <div className="flex items-center justify-between rounded-[3px] border border-ink/10 bg-vellum-dim px-3 py-2.5 text-sm">
+            <span className="font-mono text-[11px] uppercase tracking-[0.06em] text-ink-soft">
               {nights} night{nights === 1 ? '' : 's'} · ${vehicle.dailyRate}/day
             </span>
-            <span className="font-semibold">Est. total: ${estimatedTotal.toFixed(2)}</span>
+            <span className="font-display font-semibold text-ink">Est. total: ${estimatedTotal.toFixed(2)}</span>
           </div>
         )}
 
-        {validRange && checkingAvailability && <p className="text-sm text-slate-500">Checking availability…</p>}
+        {validRange && checkingAvailability && (
+          <p className="font-mono text-[11px] uppercase tracking-[0.06em] text-ink-faint">Checking availability…</p>
+        )}
         {validRange && !checkingAvailability && availability && (
-          <p className={`text-sm font-medium ${availability.available ? 'text-emerald-600' : 'text-rose-600'}`}>
+          <p
+            className={`flex items-center gap-1.5 font-mono text-[11px] font-medium uppercase tracking-[0.06em] ${
+              availability.available ? 'text-[#1f8b4c]' : 'text-[#b3402c]'
+            }`}
+          >
+            <span className={`h-1.5 w-1.5 rounded-full ${availability.available ? 'bg-[#1f8b4c]' : 'bg-[#b3402c]'}`} />
             {availability.available ? 'Available for these dates' : 'Not available for these dates'}
           </p>
         )}

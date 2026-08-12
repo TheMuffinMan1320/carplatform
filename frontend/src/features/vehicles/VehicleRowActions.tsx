@@ -22,7 +22,7 @@ export function VehicleRowActions({ vehicle, canManage, canDelete, onEdit }: Veh
   const { showToast } = useToast()
 
   if (!canManage) {
-    return <span className="text-xs text-slate-400">Different location</span>
+    return <span className="font-mono text-[11px] uppercase tracking-[0.06em] text-ink-faint">Different location</span>
   }
 
   const handleStatusChange = async (status: VehicleStatus) => {
@@ -47,8 +47,8 @@ export function VehicleRowActions({ vehicle, canManage, canDelete, onEdit }: Veh
 
   return (
     <div className="flex flex-col gap-1">
-      <div className="flex items-center gap-2">
-        <button onClick={onEdit} className="text-sm font-medium text-slate-700 hover:underline">
+      <div className="flex flex-wrap items-center gap-2">
+        <button onClick={onEdit} className="font-display text-[13px] font-medium text-signal hover:underline">
           Edit
         </button>
         <Select
@@ -62,7 +62,7 @@ export function VehicleRowActions({ vehicle, canManage, canDelete, onEdit }: Veh
             </option>
           ))}
         </Select>
-        <Link to={`/fleet/vehicles/${vehicle.id}/maintenance`} className="text-sm font-medium text-slate-700 hover:underline">
+        <Link to={`/fleet/vehicles/${vehicle.id}/maintenance`} className="font-display text-[13px] font-medium text-signal hover:underline">
           Maintenance
         </Link>
         {canDelete && (
@@ -71,7 +71,7 @@ export function VehicleRowActions({ vehicle, canManage, canDelete, onEdit }: Veh
           </Button>
         )}
       </div>
-      {error && <span className="text-xs text-rose-600">{error}</span>}
+      {error && <span className="font-mono text-[11px] text-[#b3402c]">{error}</span>}
     </div>
   )
 }

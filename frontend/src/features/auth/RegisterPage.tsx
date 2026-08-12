@@ -4,6 +4,7 @@ import { useAuth } from '../../context/AuthContext'
 import { Card } from '../../components/ui/Card'
 import { Input } from '../../components/ui/Input'
 import { Button } from '../../components/ui/Button'
+import { BrandMark } from '../../components/brand/BrandMark'
 import { applyServerErrors } from '../../lib/errorMapping'
 import { homePathForRole } from '../../lib/roleHome'
 
@@ -67,46 +68,66 @@ export function RegisterPage() {
   }
 
   return (
-    <div className="mx-auto max-w-sm py-12">
-      <h1 className="mb-6 text-center text-2xl font-bold text-slate-900">Create an account</h1>
-      <Card className="p-6">
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-          {formError && <div className="rounded-md bg-rose-50 px-3 py-2 text-sm text-rose-700">{formError}</div>}
-          <div className="grid grid-cols-2 gap-3">
-            <Input label="First name" required value={form.firstName} onChange={setField('firstName')} error={fieldErrors.firstName} />
-            <Input label="Last name" required value={form.lastName} onChange={setField('lastName')} error={fieldErrors.lastName} />
-          </div>
-          <Input
-            label="Email"
-            type="email"
-            required
-            value={form.email}
-            onChange={setField('email')}
-            error={fieldErrors.email}
-            autoComplete="email"
-          />
-          <Input
-            label="Password"
-            type="password"
-            required
-            value={form.password}
-            onChange={setField('password')}
-            error={fieldErrors.password}
-            hint="8-72 characters"
-            autoComplete="new-password"
-          />
-          <Input label="Phone (optional)" value={form.phone} onChange={setField('phone')} error={fieldErrors.phone} />
-          <Button type="submit" loading={submitting} className="mt-2">
-            Create account
-          </Button>
-        </form>
-      </Card>
-      <p className="mt-4 text-center text-sm text-slate-600">
-        Already have an account?{' '}
-        <Link to="/login" className="font-medium text-slate-900 hover:underline">
-          Log in
+    <div className="-mx-4 -mt-8 grid grid-cols-1 sm:-mx-6 lg:min-h-[calc(100vh-8.5rem)] lg:grid-cols-2">
+      <div className="drafting-grid relative flex flex-col gap-6 overflow-hidden bg-blueprint px-6 py-8 text-blueprint-line sm:px-10 sm:py-10 lg:justify-between lg:gap-0 lg:py-12">
+        <Link to="/vehicles" className="flex items-center gap-2 font-display text-lg font-semibold text-white">
+          <BrandMark className="h-6 w-6" />
+          MyDrive
         </Link>
-      </p>
+        <div className="relative flex flex-col gap-3">
+          <h1 className="max-w-sm font-display text-2xl font-semibold leading-[1.15] text-white sm:text-3xl">
+            Create an account to start booking.
+          </h1>
+        </div>
+        <p className="hidden font-mono text-[11px] uppercase tracking-[0.06em] text-blueprint-line-dim sm:block">
+          Every registration starts as a customer role
+        </p>
+      </div>
+
+      <div className="flex flex-col items-center justify-center px-4 py-10 sm:px-6 sm:py-12">
+        <div className="w-full max-w-sm">
+          <Card className="p-6">
+            <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+              {formError && (
+                <div className="rounded-[3px] border border-[#b3402c]/30 bg-[#fbe7e2] px-3 py-2 text-sm text-[#8f3222]">{formError}</div>
+              )}
+              <div className="grid grid-cols-2 gap-3">
+                <Input label="First name" required value={form.firstName} onChange={setField('firstName')} error={fieldErrors.firstName} />
+                <Input label="Last name" required value={form.lastName} onChange={setField('lastName')} error={fieldErrors.lastName} />
+              </div>
+              <Input
+                label="Email"
+                type="email"
+                required
+                value={form.email}
+                onChange={setField('email')}
+                error={fieldErrors.email}
+                autoComplete="email"
+              />
+              <Input
+                label="Password"
+                type="password"
+                required
+                value={form.password}
+                onChange={setField('password')}
+                error={fieldErrors.password}
+                hint="8-72 characters"
+                autoComplete="new-password"
+              />
+              <Input label="Phone (optional)" value={form.phone} onChange={setField('phone')} error={fieldErrors.phone} />
+              <Button type="submit" loading={submitting} className="mt-2 w-full">
+                Create account
+              </Button>
+            </form>
+          </Card>
+          <p className="mt-4 text-center text-sm text-ink-soft">
+            Already have an account?{' '}
+            <Link to="/login" className="font-medium text-ink hover:text-signal">
+              Log in
+            </Link>
+          </p>
+        </div>
+      </div>
     </div>
   )
 }
