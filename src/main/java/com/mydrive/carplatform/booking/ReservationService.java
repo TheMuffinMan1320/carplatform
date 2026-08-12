@@ -43,6 +43,7 @@ public class ReservationService {
         this.stateMachine = stateMachine;
     }
 
+    @Transactional(readOnly = true)
     public Reservation get(UUID id, CurrentUser currentUser) {
         Reservation reservation = find(id);
         requireViewAccess(reservation, currentUser);
