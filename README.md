@@ -8,6 +8,15 @@ designed to be consumed by a future React or React Native client.
 Built to scale from a single-lot personal fleet to a multi-location operation — vehicles,
 staff, and maintenance are all scoped by location from the schema up.
 
+**Live demo:** frontend at
+[carplatform-frontend-production.up.railway.app](https://carplatform-frontend-production.up.railway.app),
+API at
+[carplatform-api-production.up.railway.app](https://carplatform-api-production.up.railway.app)
+with interactive docs at
+[/swagger-ui.html](https://carplatform-api-production.up.railway.app/swagger-ui.html). Stripe is
+running without a live key on this deployment, so payment-flow requests will fail — everything
+else (auth, fleet, booking, maintenance) is fully live against a real Postgres instance.
+
 ## Highlights
 
 - **Double-booking is impossible, not just checked for.** Reservation overlap is enforced
